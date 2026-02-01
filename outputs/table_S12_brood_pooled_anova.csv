@@ -1,0 +1,3 @@
+Source of Variation,df,SS,MS,F value,Pr(>F)
+treatment_id,2,8.97,4.48,0.28,0.76
+Residuals,18,286.08,15.89,,

@@ -1,0 +1,17 @@
+Source of Variation,df,SS,MS,F value,Pr(>F)
+markers,1,13.30,13.30,847.23,2.48e-132
+treatment_id,2,0.23,0.12,7.35,0.00
+brood_id,6,0.09,0.01,0.94,0.46
+sex,1,0.10,0.10,6.32,0.01
+markers:treatment_id,2,0.34,0.17,10.74,2.46e-05
+markers:brood_id,6,0.28,0.05,2.93,0.01
+treatment_id:brood_id,12,0.10,0.01,0.55,0.88
+markers:sex,1,0.83,0.83,52.95,7.36e-13
+treatment_id:sex,2,0.02,0.01,0.49,0.61
+brood_id:sex,6,0.04,0.01,0.43,0.86
+markers:treatment_id:brood_id,12,0.13,0.01,0.67,0.78
+markers:treatment_id:sex,2,0.00,0.00,0.10,0.91
+markers:brood_id:sex,6,0.16,0.03,1.69,0.12
+treatment_id:brood_id:sex,12,0.08,0.01,0.40,0.96
+markers:treatment_id:brood_id:sex,12,0.15,0.01,0.77,0.68
+Residuals,914,14.34,0.02,,
