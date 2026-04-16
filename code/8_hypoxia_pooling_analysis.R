@@ -46,8 +46,12 @@ colnames(MLE_H3_looped_vials_outputs)<-c("ID",
                                          "lnL",
                                          "Convergence")
 
-for (g in 1:4) {
-  single_experimental_unit <- as.numeric(multi_locus_individual_vials_dataset[g,])
+
+multi_locus_full_dataset<-read.csv("full_dataset.csv", header=TRUE)
+
+
+for (g in 1:3) {
+  single_experimental_unit <- as.numeric(multi_locus_full_dataset[g,])
   observed_count <- c(single_experimental_unit[130],single_experimental_unit[2:129])
   
   
@@ -613,7 +617,7 @@ for (g in 1:21) {
 }
 
 MLE_H3_looped_brood_outputs
-write.csv(MLE_H3_looped_brood_outputs,"../outputs/23_multi_locus_brood_pooled_H3_mle_output.csv",row.names = TRUE)
+write.csv(MLE_H3_looped_brood_outputs,"../outputs/full_dataset_output.csv",row.names = TRUE)
 
 # Perform ANOVA on brood pooled estimates fitting an intercept only model
 brood_pooled_anova_input <- as.data.frame(MLE_H3_looped_brood_outputs)
