@@ -55,8 +55,8 @@ cat("Total unique genes: ",
 #Figure 1a
 # Ensure your list is ready
 deg_list <- list( 
-  "Chamber 8% vs Control 21%"  = Normoxia_vs_Control_sig$gene_id,
-  "Chamber 21% vs Control 21%" = Hypoxia_vs_Control_sig$gene_id,
+  "Chamber 8% vs Control 21%"  = Hypoxia_vs_Control_sig$gene_id,
+  "Chamber 21% vs Control 21%" = Normoxia_vs_Control_sig$gene_id,
   "Chamber 21% vs Chamber 8%"  = Normoxia_vs_Hypoxia_sig$gene_id
 )
 
