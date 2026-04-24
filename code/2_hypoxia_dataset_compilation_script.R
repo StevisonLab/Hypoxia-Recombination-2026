@@ -3335,27 +3335,54 @@ write.csv(cleaned_multiply_marked_viability_dataset,"../outputs/13b_cleaned_mult
 write.csv(multi_locus_individual_vials_dataset,"../outputs/13_multi_locus_individual_vials_dataset.csv",row.names = TRUE)
 
 # Create input data file for fitting Cx(Co)M model to flies pooled by replicate cross using individual_vials_dataset
-cross_pooling_matrix <- multi_locus_individual_vials_dataset[,-c(1,131,132,133)]
-SK_14_1_rows <- c(1, 11, 21, 31, 41, 51, 61)
-SK_14_1 <- colSums(cross_pooling_matrix[SK_14_1_rows, ])
-SK_14_3_rows <- c(2, 12, 22, 32, 42, 52, 62)
-SK_14_3 <- colSums(cross_pooling_matrix[SK_14_3_rows, ])
-SK_14_5_rows <- c(3, 13, 23, 33, 43, 53, 63)
-SK_14_5 <- colSums(cross_pooling_matrix[SK_14_5_rows, ])
-SK_14_6_rows <- c(4, 14, 24, 34, 44, 54, 64)
-SK_14_6 <- colSums(cross_pooling_matrix[SK_14_6_rows, ])
-SK_14_8_rows <- c(5, 15, 25, 35, 45, 55, 65)
-SK_14_8 <- colSums(cross_pooling_matrix[SK_14_8_rows, ])
-SK_14_12_rows <- c(6, 16, 26, 36, 46, 56, 66)
-SK_14_12 <- colSums(cross_pooling_matrix[SK_14_12_rows, ])
-SK_14_14_rows <- c(7, 17, 27, 37, 47, 57, 67)
-SK_14_14 <- colSums(cross_pooling_matrix[SK_14_14_rows, ])
-SK_14_17_rows <- c(8, 18, 28, 38, 48, 58, 68)
-SK_14_17 <- colSums(cross_pooling_matrix[SK_14_17_rows, ])
-SK_14_18_rows <- c(9, 19, 29, 39, 49, 59, 69)
-SK_14_18 <- colSums(cross_pooling_matrix[SK_14_18_rows, ])
-SK_14_19_rows <- c(10, 20, 30, 40, 50, 60, 70)
-SK_14_19 <- colSums(cross_pooling_matrix[SK_14_19_rows, ])
+cleaned_cross_1 <- filter(cleaned_multiply_marked_viability_dataset, cross_id == 1)
+cleaned_cross_2 <- filter(cleaned_multiply_marked_viability_dataset, cross_id == 2)
+cleaned_cross_3 <- filter(cleaned_multiply_marked_viability_dataset, cross_id == 3)
+cleaned_cross_4 <- filter(cleaned_multiply_marked_viability_dataset, cross_id == 4)
+cleaned_cross_5 <- filter(cleaned_multiply_marked_viability_dataset, cross_id == 5)
+cleaned_cross_6 <- filter(cleaned_multiply_marked_viability_dataset, cross_id == 6)
+cleaned_cross_7 <- filter(cleaned_multiply_marked_viability_dataset, cross_id == 7)
+cleaned_cross_8 <- filter(cleaned_multiply_marked_viability_dataset, cross_id == 8)
+cleaned_cross_9 <- filter(cleaned_multiply_marked_viability_dataset, cross_id == 9)
+cleaned_cross_10 <- filter(cleaned_multiply_marked_viability_dataset, cross_id == 10)
+cleaned_cross_11 <- filter(cleaned_multiply_marked_viability_dataset, cross_id == 11)
+cleaned_cross_12 <- filter(cleaned_multiply_marked_viability_dataset, cross_id == 12)
+cleaned_cross_13 <- filter(cleaned_multiply_marked_viability_dataset, cross_id == 13)
+cleaned_cross_14 <- filter(cleaned_multiply_marked_viability_dataset, cross_id == 14)
+cleaned_cross_15 <- filter(cleaned_multiply_marked_viability_dataset, cross_id == 15)
+cleaned_cross_16 <- filter(cleaned_multiply_marked_viability_dataset, cross_id == 16)
+cleaned_cross_17 <- filter(cleaned_multiply_marked_viability_dataset, cross_id == 17)
+cleaned_cross_18 <- filter(cleaned_multiply_marked_viability_dataset, cross_id == 18)
+cleaned_cross_19 <- filter(cleaned_multiply_marked_viability_dataset, cross_id == 19)
+cleaned_cross_20 <- filter(cleaned_multiply_marked_viability_dataset, cross_id == 20)
+cleaned_cross_21 <- filter(cleaned_multiply_marked_viability_dataset, cross_id == 21)
+cleaned_cross_22 <- filter(cleaned_multiply_marked_viability_dataset, cross_id == 22)
+cleaned_cross_23 <- filter(cleaned_multiply_marked_viability_dataset, cross_id == 23)
+cleaned_cross_24 <- filter(cleaned_multiply_marked_viability_dataset, cross_id == 24)
+cleaned_cross_25 <- filter(cleaned_multiply_marked_viability_dataset, cross_id == 25)
+cleaned_cross_26 <- filter(cleaned_multiply_marked_viability_dataset, cross_id == 26)
+cleaned_cross_27 <- filter(cleaned_multiply_marked_viability_dataset, cross_id == 27)
+cleaned_cross_28 <- filter(cleaned_multiply_marked_viability_dataset, cross_id == 28)
+cleaned_cross_29 <- filter(cleaned_multiply_marked_viability_dataset, cross_id == 29)
+cleaned_cross_30 <- filter(cleaned_multiply_marked_viability_dataset, cross_id == 30)
+cleaned_cross_31 <- filter(cleaned_multiply_marked_viability_dataset, cross_id == 31)
+cleaned_cross_32 <- filter(cleaned_multiply_marked_viability_dataset, cross_id == 32)
+cleaned_cross_33 <- filter(cleaned_multiply_marked_viability_dataset, cross_id == 33)
+cleaned_cross_34 <- filter(cleaned_multiply_marked_viability_dataset, cross_id == 34)
+cleaned_cross_35 <- filter(cleaned_multiply_marked_viability_dataset, cross_id == 35)
+cleaned_cross_36 <- filter(cleaned_multiply_marked_viability_dataset, cross_id == 36)
+stripped_cross_1 <- cleaned_cross_1[,-c(1,2,3,4,5,6,135,136,137,138,139,140,141,142,143,145,146,147)]
+preserved_cross_1<- cleaned_cross_1[1,c(145,146,147)]
+pooled_cross_1 <-colSums(stripped_cross_1)
+
+#THERE IS A ERROR STARTING HERE
+#THERE IS A ERROR STARTING HERE
+#THERE IS A ERROR STARTING HERE
+#THERE IS A ERROR STARTING HERE
+#THERE IS A ERROR STARTING HERE
+#THERE IS A ERROR STARTING HERE
+#THERE IS A ERROR STARTING HERE
+
 multi_locus_cross_pooled_dataset <- rbind(SK_14_1, SK_14_3, SK_14_5, SK_14_6, SK_14_8, SK_14_12, SK_14_14, SK_14_17, SK_14_18, SK_14_19)
 unique_cross_id <- c("SK_14_1", "SK_14_3", "SK_14_5", "SK_14_6", "SK_14_8", "SK_14_12", "SK_14_14", "SK_14_17", "SK_14_18", "SK_14_19")
 cross_viability_vector <- c(0.921, 0.921, 0.921, 0.921, 0.921, 0.921, 0.921, 0.921, 0.921, 0.921)
