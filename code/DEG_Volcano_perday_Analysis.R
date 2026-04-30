@@ -297,5 +297,5 @@ combined_all <- plot_grid(
   label_size = 16, label_fontface = "bold"
 )
 final_all <- plot_grid(combined_all, leg, ncol = 2, rel_widths = c(3, 0.8))
-ggsave("outputs/volcano_combined_Day2_and_Day6.png", final_all, width = 26, height = 12, dpi = 300)
+ggsave("outputs/volcano_combined_Day2_and_Day6.png", final_all, width = 26, height = 12, dpi = 600)
 

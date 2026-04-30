@@ -1,66 +1,56 @@
+setwd("~/GitHub/Hypoxia-Recombination-2026/")
+
 # ============================================================================
-# DOT PLOT: GO Pathway Enrichment — Up vs Down Classification
-# Uses .all_GOenrich files; classifies terms by majority direction
-# Combined Up + Down panel plot | High DPI | No transparency
+# DOT PLOT: Separate Up & Down Regulated GO Pathway Plots
+# High DPI | No transparency | Separate ordering per direction
 # ============================================================================
 
 library(dplyr)
 library(tidyr)
 library(ggplot2)
-library(patchwork)   # for combining plots side-by-side
 
 # ============================================================================
 # PART 1: LOAD FILES
 # ============================================================================
 
-setwd("~/GitHub/Hypoxia-Recombination-2026/")
+Hypoxia_vs_Control_up       <- read.csv("inputs/HypoxiavsControl.up_GOenrich_significant.csv")
+Normoxia_vs_Control_up      <- read.csv("inputs/NormoxiavsControl.up_GOenrich_significant.csv")
 
-Hypoxia_vs_Control  <- read.csv("inputs/HypoxiavsControl.all_GOenrich_significant.csv")
-Normoxia_vs_Control <- read.csv("inputs/NormoxiavsControl.all_GOenrich_significant.csv")
-
-# ============================================================================
-# PART 2: ADD COMPARISON LABELS
-# ============================================================================
-
-Hypoxia_vs_Control$Comparison  <- "Chamber 8% vs Control 21%"
-Normoxia_vs_Control$Comparison <- "Chamber 21% vs Control 21%"
+Hypoxia_vs_Control_down     <- read.csv("inputs/HypoxiavsControl.down_GOenrich_significant.csv")
+Normoxia_vs_Control_down    <- read.csv("inputs/NormoxiavsControl.down_GOenrich_significant.csv")
 
 # ============================================================================
-# PART 3: COMBINE, FILTER (padj < 0.05), CLASSIFY DIRECTION
-# ============================================================================
-# Classification rule:
-#   - If Up   > 50% of Count  → "Up"
-#   - If Down > 50% of Count  → "Down"
-#   - Otherwise               → "Mixed" (excluded from both plots)
+# PART 2: ADD LABELS
 # ============================================================================
 
-all_data <- bind_rows(
-  Hypoxia_vs_Control,
-  Normoxia_vs_Control,
-  #  Normoxia_vs_Hypoxia
-) %>%
-  filter(padj < 0.05) %>%
-  mutate(
-    # Ensure numeric
-    Up   = as.numeric(Up),
-    Down = as.numeric(Down),
-    Count = as.numeric(Count),
-    
-    # Classify direction
-    Direction = case_when(
-      Up   / Count > 0.5 ~ "Up",
-      Down / Count > 0.5 ~ "Down",
-      TRUE               ~ "Mixed"
-    )
-  )
+label_and_tag <- function(df, comparison, direction) {
+  df$Comparison <- comparison
+  df$Direction  <- direction
+  return(df)
+}
 
-cat("Total significant entries:   ", nrow(all_data), "\n")
-cat("Classified as Up:            ", sum(all_data$Direction == "Up"), "\n")
-cat("Classified as Down:          ", sum(all_data$Direction == "Down"), "\n")
-cat("Classified as Mixed (excluded):", sum(all_data$Direction == "Mixed"), "\n\n")
+Hypoxia_vs_Control_up    <- label_and_tag(Hypoxia_vs_Control_up,    "Chamber 8% vs Control 21%",  "Up")
+Normoxia_vs_Control_up   <- label_and_tag(Normoxia_vs_Control_up,   "Chamber 21% vs Control 21%", "Up")
 
-up_data   <- filter(all_data, Direction == "Up")
-down_data <- filter(all_data, Direction == "Down")
+Hypoxia_vs_Control_down  <- label_and_tag(Hypoxia_vs_Control_down,  "Chamber 8% vs Control 21%",  "Down")
+Normoxia_vs_Control_down <- label_and_tag(Normoxia_vs_Control_down, "Chamber 21% vs Control 21%", "Down")
+
+# ============================================================================
+# PART 3: COMBINE AND FILTER (padj < 0.05)
+# ============================================================================
+
+up_data <- bind_rows(
+  Hypoxia_vs_Control_up,
+  Normoxia_vs_Control_up,
+) %>% filter(padj < 0.05)
+
+down_data <- bind_rows(
+  Hypoxia_vs_Control_down,
+  Normoxia_vs_Control_down,
+) %>% filter(padj < 0.05)
+
+cat("Up-regulated significant entries:  ", nrow(up_data), "\n")
+cat("Down-regulated significant entries:", nrow(down_data), "\n")
 
 # ============================================================================
 # PART 4: SHARED PREP FUNCTION
@@ -95,47 +85,50 @@ get_term_order <- function(df) {
   df %>%
     group_by(Description_short) %>%
     summarise(max_sig = max(neg_log10_padj, na.rm = TRUE), .groups = "drop") %>%
-    arrange(max_sig) %>%
+    arrange(max_sig) %>%   # ascending so most significant appears at top of plot
     pull(Description_short)
 }
 
 # ============================================================================
-# PART 6: PLOT FUNCTION
+# PART 6: SHARED PLOT FUNCTION
 # ============================================================================
 
-make_dotplot <- function(df, direction, title_label, show_legend = TRUE) {
+make_dotplot <- function(df, direction, dot_color, title_label) {
   
+  # Prepare data
   df <- prepare_dotplot_data(df)
+  
+  # Get term ordering
   term_order <- get_term_order(df)
   df <- df %>%
     mutate(Description_short = factor(Description_short, levels = term_order))
   
-  color_scale <- if (direction == "Up") {
-    scale_color_gradientn(
-      colors = c("#FCBBA1", "#FC4E2A", "#800026"),
-      name = "-log10(padj)"
-    )
-  } else {
-    scale_color_gradientn(
-      colors = c("#BDD7E7", "#2171B5", "#08306B"),
-      name = "-log10(padj)"
-    )
-  }
+  # Auto-scale figure height
+  n_terms <- length(term_order)
+  fig_h   <- max(10, n_terms * 0.30 + 4)
   
   p <- ggplot(
     df,
     aes(
-      x     = GeneRatio_numeric,
-      y     = Description_short,
-      size  = Count,
-      color = neg_log10_padj
+      x    = GeneRatio_numeric,
+      y    = Description_short,
+      size = Count,
+      color = neg_log10_padj   # color intensity = significance
     )
   ) +
-    geom_point(alpha = 1) +
+    geom_point(alpha = 1) +    # NO transparency
     
     facet_wrap(~Comparison, ncol = 3) +
     
-    color_scale +
+    # Color gradient for significance
+    scale_color_gradientn(
+      colors = if (direction == "Up") {
+        c("#FCBBA1", "#FC4E2A", "#800026")   # light red → deep red
+      } else {
+        c("#BDD7E7", "#2171B5", "#08306B")   # light blue → deep blue
+      },
+      name = "-log10(padj)"
+    ) +
     
     scale_size_continuous(
       name  = "Gene Count",
@@ -152,7 +145,7 @@ make_dotplot <- function(df, direction, title_label, show_legend = TRUE) {
       y     = "GO Pathway"
     ) +
     
-    theme_minimal(base_size = 20) +
+    theme_minimal(base_size = 20) +        # increased base font size
     theme(
       panel.border     = element_rect(color = "black", fill = NA, linewidth = 0.8),
       strip.background = element_rect(color = "black", fill = "grey95", linewidth = 0.8),
@@ -163,24 +156,26 @@ make_dotplot <- function(df, direction, title_label, show_legend = TRUE) {
       plot.title       = element_text(size = 16, face = "bold", hjust = 0.5),
       panel.grid.minor = element_blank(),
       panel.grid.major = element_line(color = "grey90"),
-      legend.title     = element_text(face = "bold"),
-      legend.position  = if (show_legend) "right" else "none"
+      legend.title     = element_text(face = "bold", size = 14),
+      legend.text      = element_text(size = 13),
+      legend.position  = "right"
     )
   
-  n_terms <- length(term_order)
-  fig_h   <- max(10, n_terms * 0.30 + 4)
-  
-  return(list(plot = p, height = fig_h, n_terms = n_terms))
+  return(list(plot = p, height = fig_h))
 }
 
 # ============================================================================
-# PART 7: GENERATE INDIVIDUAL PLOTS
+# PART 7: GENERATE AND SAVE PLOTS
 # ============================================================================
 
-up_result   <- make_dotplot(up_data,   "Up",   "GO Enrichment — Up-Regulated Genes (>50% Up)")
-down_result <- make_dotplot(down_data, "Down", "GO Enrichment — Down-Regulated Genes (>50% Down)")
+# --- UP REGULATED PLOT ---
+up_result <- make_dotplot(
+  df          = up_data,
+  direction   = "Up",
+  dot_color   = "red",
+  title_label = "GO Pathway Enrichment — Up-Regulated Genes"
+)
 
-# Save individual plots
 ggsave(
   "outputs/dotplot_UP_regulated_GO.png",
   up_result$plot,
@@ -189,7 +184,17 @@ ggsave(
   dpi    = 300,
   bg     = "white"
 )
-cat("✓ Saved: dotplot_UP_regulated_GO.png  [20 x", round(up_result$height, 1), "in]\n")
+
+cat("✓ Up-regulated dot plot saved: dotplot_UP_regulated_GO.png\n")
+cat("  Figure size: 20 x", round(up_result$height, 1), "inches | 300 DPI\n")
+
+# --- DOWN REGULATED PLOT ---
+down_result <- make_dotplot(
+  df          = down_data,
+  direction   = "Down",
+  dot_color   = "blue",
+  title_label = "GO Pathway Enrichment — Down-Regulated Genes"
+)
 
 ggsave(
   "outputs/dotplot_DOWN_regulated_GO.png",
@@ -199,32 +204,6 @@ ggsave(
   dpi    = 300,
   bg     = "white"
 )
-cat("✓ Saved: dotplot_DOWN_regulated_GO.png  [20 x", round(down_result$height, 1), "in]\n")
 
-# ============================================================================
-# PART 8: COMBINED STACKED PLOT (Up on top, Down below)
-# ============================================================================
-# Use patchwork to stack vertically; heights are proportional to term count
-
-combined <- up_result$plot / down_result$plot +
-  plot_layout(heights = c(up_result$n_terms, down_result$n_terms)) +
-  plot_annotation(
-    title   = "GO Pathway Enrichment — Up & Down Regulated Genes",
-    theme   = theme(
-      plot.title = element_text(size = 20, face = "bold", hjust = 0.5)
-    )
-  )
-
-combined_height <- up_result$height + down_result$height
-
-ggsave(
-  "outputs/dotplot_COMBINED_UP_DOWN_GO.png",
-  combined,
-  width  = 20,
-  height = combined_height,
-  dpi    = 300,
-  bg     = "white"
-)
-cat("✓ Saved: dotplot_COMBINED_UP_DOWN_GO.png  [20 x", round(combined_height, 1), "in]\n")
-
-cat("\nDone! 3 files saved.\n")
+cat("✓ Down-regulated dot plot saved: dotplot_DOWN_regulated_GO.png\n")
+cat("  Figure size: 20 x", round(down_result$height, 1), "inches | 300 DPI\n")
