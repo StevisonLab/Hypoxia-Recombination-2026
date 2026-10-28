@@ -1,7 +1,6 @@
 # ==========================
 # UPSET PLOTS PER DAY
 # ==========================
-
 library(UpSetR)
 library(dplyr)
 
@@ -15,7 +14,9 @@ Hypoxia_vs_Normoxia_Day6_deg <- read.csv("inputs/Hypoxia_Day6vsNormoxia_Day6_deg
 Control_vs_Normoxia_Day6_deg <- read.csv("inputs/Control_Day6vsNormoxia_Day6_deg.csv", row.names = 1)
 Control_vs_Hypoxia_Day6_deg  <- read.csv("inputs/Control_Day6vsHypoxia_Day6_deg.csv",  row.names = 1)
 
-p_threshold <- 0.05
+# Thresholds
+p_threshold      <- 0.05
+log2fc_threshold <- 1
 
 # --------------------------
 # Function to filter DEGs
@@ -24,13 +25,13 @@ filter_deg <- function(df) {
   df %>%
     filter(!is.na(log2FoldChange),
            !is.na(padj),
-           padj < p_threshold)
+           padj < p_threshold,
+           abs(log2FoldChange) > log2fc_threshold)
 }
 
 # ==========================
 # DAY 2
 # ==========================
-
 CH_D2 <- filter_deg(Control_vs_Hypoxia_Day2_deg)
 CN_D2 <- filter_deg(Control_vs_Normoxia_Day2_deg)
 HN_D2 <- filter_deg(Hypoxia_vs_Normoxia_Day2_deg)
@@ -42,35 +43,29 @@ deg_list_D2 <- list(
 )
 
 png("outputs/upset_Day2.png", width = 1100, height = 900, res = 150)
-
 upset(
   fromList(deg_list_D2),
-  
   sets = c(
     "Chamber 21% vs Chamber 8%",
     "Chamber 21% vs Control 21%",
     "Chamber 8% vs Control 21%"
   ),
-  keep.order = TRUE,
-  
-  main.bar.color = "gray38",
-  matrix.color = "red",
-  sets.bar.color = c("gray30", "gray40", "gray60"),
-  
-  text.scale = c(1.8, 1.5, 1.5, 1.3, 1.8, 1.5),
-  point.size = 5,
-  line.size = 2,
-  mb.ratio = c(0.6, 0.4),
+  keep.order      = TRUE,
+  main.bar.color  = "gray38",
+  matrix.color    = "red",
+  sets.bar.color  = c("gray30", "gray40", "gray60"),
+  text.scale      = c(1.8, 1.5, 1.5, 1.3, 1.8, 1.5),
+  point.size      = 5,
+  line.size       = 2,
+  mb.ratio        = c(0.6, 0.4),
   mainbar.y.label = "Gene Intersections",
-  sets.x.label = "DEGs per Comparison"
+  sets.x.label    = "DEGs per Comparison"
 )
-
 dev.off()
 
 # ==========================
 # DAY 6
 # ==========================
-
 CH_D6 <- filter_deg(Control_vs_Hypoxia_Day6_deg)
 CN_D6 <- filter_deg(Control_vs_Normoxia_Day6_deg)
 HN_D6 <- filter_deg(Hypoxia_vs_Normoxia_Day6_deg)
@@ -82,28 +77,26 @@ deg_list_D6 <- list(
 )
 
 png("outputs/upset_Day6.png", width = 1100, height = 900, res = 150)
-
 upset(
   fromList(deg_list_D6),
-  
   sets = c(
     "Chamber 21% vs Chamber 8%",
     "Chamber 21% vs Control 21%",
     "Chamber 8% vs Control 21%"
   ),
-  keep.order = TRUE,
-  
-  main.bar.color = "gray38",
-  matrix.color = "blue",   # optional: different color for day 6
-  
-  sets.bar.color = c("gray30", "gray40", "gray60"),
-  
-  text.scale = c(1.8, 1.5, 1.5, 1.3, 1.8, 1.5),
-  point.size = 5,
-  line.size = 2,
-  mb.ratio = c(0.6, 0.4),
+  keep.order      = TRUE,
+  main.bar.color  = "gray38",
+  matrix.color    = "blue",
+  sets.bar.color  = c("gray30", "gray40", "gray60"),
+  text.scale      = c(1.8, 1.5, 1.5, 1.3, 1.8, 1.5),
+  point.size      = 5,
+  line.size       = 2,
+  mb.ratio        = c(0.6, 0.4),
   mainbar.y.label = "Gene Intersections",
-  sets.x.label = "DEGs per Comparison"
+  sets.x.label    = "DEGs per Comparison"
 )
-
 dev.off()
+
+cat("Thresholds applied: |log2FC| >", log2fc_threshold, "& padj <", p_threshold, "\n")
+cat("✓ Saved: outputs/upset_Day2.png\n")
+cat("✓ Saved: outputs/upset_Day6.png\n")

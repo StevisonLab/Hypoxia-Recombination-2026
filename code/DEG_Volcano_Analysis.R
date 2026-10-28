@@ -51,7 +51,7 @@ y_limits <- c(0, max(all_neglog10p, na.rm = TRUE) * 1.1)
 # Volcano wrapper function
 # --------------------------
 create_volcano_plot <- function(deg_data, title, condition_right, condition_left,
-                                pval_threshold = 0.05, top_genes = 20,
+                                pval_threshold = 0.05,log2fc_threshold = 1, top_genes = 20,
                                 ylim = NULL, xlim = NULL) {
   
   deg_data <- deg_data %>%
@@ -59,8 +59,8 @@ create_volcano_plot <- function(deg_data, title, condition_right, condition_left
       log2FC = log2FoldChange,
       neglog10p = -log10(padj),
       significance = case_when(
-        log2FC > 0 & padj < pval_threshold ~ paste0("Upregulated in ", condition_right),
-        log2FC < 0 & padj < pval_threshold ~ paste0("Upregulated in ", condition_left),
+        log2FC > log2fc_threshold  & padj < pval_threshold ~ paste0("Upregulated in ", condition_right),
+        log2FC < -log2fc_threshold & padj < pval_threshold ~ paste0("Upregulated in ", condition_left),
         TRUE ~ "Not significant"
       )
     )
@@ -79,6 +79,8 @@ create_volcano_plot <- function(deg_data, title, condition_right, condition_left
     scale_color_manual(values = legend_colors, limits = names(legend_colors), drop = FALSE) +
     geom_hline(yintercept = -log10(pval_threshold), linetype = "dashed", color = "gray40") +
     geom_vline(xintercept = 0, linetype = "dashed", color = "gray40") +
+    geom_vline(xintercept = c(-log2fc_threshold, log2fc_threshold), 
+               linetype = "dashed", color = "gray40")+
     geom_text_repel(
       data = genes_to_label,
       aes(label = gene_name),

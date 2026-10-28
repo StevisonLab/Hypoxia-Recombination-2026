@@ -83,19 +83,18 @@ y_limits <- c(0, max(all_neglog10p, na.rm = TRUE) * 1.1)
 # Volcano plot function
 # --------------------------
 create_volcano_plot <- function(deg_data, title, condition_right, condition_left,
-                                pval_threshold = 0.05, top_genes = 20,
-                                ylim = NULL, xlim = NULL) {
+                                pval_threshold = 0.05, log2fc_threshold = 1,  # <-- NEW
+                                top_genes = 20, ylim = NULL, xlim = NULL) {
   
-  # Split top genes per side
-  n_each <- ceiling(top_genes / 2)  # 10 per side if top_genes = 20
+  n_each <- ceiling(top_genes / 2)
   
   deg_data <- deg_data %>%
     mutate(
-      log2FC = log2FoldChange,
+      log2FC    = log2FoldChange,
       neglog10p = -log10(padj),
       significance = case_when(
-        log2FC > 0 & padj < pval_threshold ~ paste0("Upregulated in ", condition_right),
-        log2FC < 0 & padj < pval_threshold ~ paste0("Upregulated in ", condition_left),
+        log2FC >  log2fc_threshold & padj < pval_threshold ~ paste0("Upregulated in ", condition_right),
+        log2FC < -log2fc_threshold & padj < pval_threshold ~ paste0("Upregulated in ", condition_left),
         TRUE ~ "Not significant"
       )
     )
@@ -120,7 +119,10 @@ create_volcano_plot <- function(deg_data, title, condition_right, condition_left
     geom_point(aes(color = significance), alpha = 0.6, size = 4.5) +
     scale_color_manual(values = legend_colors, limits = names(legend_colors), drop = FALSE) +
     geom_hline(yintercept = -log10(pval_threshold), linetype = "dashed", color = "gray40") +
-    geom_vline(xintercept = 0, linetype = "dashed", color = "gray40") +
+    # Three vertical lines: threshold boundaries + center
+    geom_vline(xintercept = c(-log2fc_threshold, log2fc_threshold),
+               linetype = "dashed", color = "gray40") +
+    geom_vline(xintercept = 0, linetype = "solid", color = "gray70", linewidth = 0.3) +
     geom_text_repel(
       data = genes_to_label,
       aes(label = gene_name),
@@ -134,19 +136,21 @@ create_volcano_plot <- function(deg_data, title, condition_right, condition_left
       max.overlaps = Inf
     ) +
     labs(
-      title = title,
-      x = "Log2 Fold Change",
-      y = "-Log10 Adjusted P-value",
-      color = "Legend"
+      title    = title,
+      x        = "Log2 Fold Change",
+      y        = "-Log10 Adjusted P-value",
+      color    = "Legend",
+      caption  = paste0("|log2FC| > ", log2fc_threshold, "  &  padj < ", pval_threshold)  # <-- documents thresholds on plot
     ) +
     theme_classic() +
     theme(
-      plot.title = element_text(hjust = 0.5, face = "bold", size = 16),
+      plot.title   = element_text(hjust = 0.5, face = "bold", size = 16),
+      plot.caption = element_text(hjust = 0.5, size = 10, color = "gray40"),
       legend.title = element_text(size = 18, face = "bold"),
-      legend.text = element_text(size = 13, face = "bold"),
+      legend.text  = element_text(size = 13, face = "bold"),
       legend.key.size = unit(1.5, "cm"),
-      axis.text = element_text(size = 13),
-      axis.title = element_text(size = 15, face = "bold")
+      axis.text    = element_text(size = 13),
+      axis.title   = element_text(size = 15, face = "bold")
     )
   
   if (!is.null(ylim) | !is.null(xlim)) {
@@ -155,6 +159,7 @@ create_volcano_plot <- function(deg_data, title, condition_right, condition_left
   
   return(p)
 }
+
 # --------------------------
 # Shared legend via dummy plot
 # --------------------------
@@ -190,6 +195,7 @@ vol_P1_D2 <- create_volcano_plot(
   condition_right = cond_hypoxia,
   condition_left  = cond_control,
   pval_threshold  = 0.05,
+  log2fc_threshold = 1,
   top_genes       = 20,
   xlim            = x_limits,
   ylim            = y_limits
@@ -201,6 +207,7 @@ vol_P2_D2 <- create_volcano_plot(
   condition_right = cond_normoxia,
   condition_left  = cond_control,
   pval_threshold  = 0.05,
+  log2fc_threshold = 1,
   top_genes       = 20,
   xlim            = x_limits,
   ylim            = y_limits
@@ -212,15 +219,11 @@ vol_P3_D2 <- create_volcano_plot(
   condition_right = cond_normoxia,
   condition_left  = cond_hypoxia,
   pval_threshold  = 0.05,
+  log2fc_threshold = 1,
   top_genes       = 20,
   xlim            = x_limits,
   ylim            = y_limits
 )
-
-# Save Day 2 individually
-#ggsave("volcano_Chamber8_vs_Control_Day2_padj.png",   vol_P1_D2, width = 8, height = 6, dpi = 300)
-#ggsave("volcano_Chamber21_vs_Control_Day2_padj.png",  vol_P2_D2, width = 8, height = 6, dpi = 300)
-#ggsave("volcano_Chamber21_vs_Chamber8_Day2_padj.png", vol_P3_D2, width = 8, height = 6, dpi = 300)
 
 # ==========================
 # DAY 6 PLOTS
@@ -232,6 +235,7 @@ vol_P1_D6 <- create_volcano_plot(
   condition_right = cond_hypoxia,
   condition_left  = cond_control,
   pval_threshold  = 0.05,
+  log2fc_threshold = 1,
   top_genes       = 20,
   xlim            = x_limits,
   ylim            = y_limits
@@ -243,6 +247,7 @@ vol_P2_D6 <- create_volcano_plot(
   condition_right = cond_normoxia,
   condition_left  = cond_control,
   pval_threshold  = 0.05,
+  log2fc_threshold = 1,
   top_genes       = 20,
   xlim            = x_limits,
   ylim            = y_limits
@@ -254,15 +259,11 @@ vol_P3_D6 <- create_volcano_plot(
   condition_right = cond_normoxia,
   condition_left  = cond_hypoxia,
   pval_threshold  = 0.05,
+  log2fc_threshold = 1,
   top_genes       = 20,
   xlim            = x_limits,
   ylim            = y_limits
 )
-
-# Save Day 6 individually
-#ggsave("volcano_Chamber8_vs_Control_Day6_padj.png",   vol_P1_D6, width = 8, height = 6, dpi = 300)
-#ggsave("volcano_Chamber21_vs_Control_Day6_padj.png",  vol_P2_D6, width = 8, height = 6, dpi = 300)
-#ggsave("volcano_Chamber21_vs_Chamber8_Day6_padj.png", vol_P3_D6, width = 8, height = 6, dpi = 300)
 
 # ==========================
 # COMBINED FIGURES
@@ -280,13 +281,13 @@ vol_P3_D6_nl <- vol_P3_D6 + theme(legend.position = "none")
 combined_D2 <- plot_grid(vol_P1_D2_nl, vol_P2_D2_nl, vol_P3_D2_nl,
                          ncol = 3, align = "hv")
 final_D2    <- plot_grid(combined_D2, leg, ncol = 2, rel_widths = c(3, 0.8))
-#ggsave("volcano_combined_Day2.png", final_D2, width = 26, height = 6, dpi = 300)
+#ggsave("outputs/volcano_combined_Day2.png", final_D2, width = 26, height = 6, dpi = 300)
 
 # --- Combined Day 6 only ---
 combined_D6 <- plot_grid(vol_P1_D6_nl, vol_P2_D6_nl, vol_P3_D6_nl,
                          ncol = 3, align = "hv")
 final_D6    <- plot_grid(combined_D6, leg, ncol = 2, rel_widths = c(3, 0.8))
-#ggsave("volcano_combined_Day6.png", final_D6, width = 26, height = 6, dpi = 300)
+#ggsave("outputs/volcano_combined_Day6.png", final_D6, width = 26, height = 6, dpi = 300)
 
 # --- Combined Day 2 + Day 6 (2 rows x 3 cols) ---
 combined_all <- plot_grid(
@@ -298,4 +299,3 @@ combined_all <- plot_grid(
 )
 final_all <- plot_grid(combined_all, leg, ncol = 2, rel_widths = c(3, 0.8))
 ggsave("outputs/volcano_combined_Day2_and_Day6.png", final_all, width = 26, height = 12, dpi = 600)
-

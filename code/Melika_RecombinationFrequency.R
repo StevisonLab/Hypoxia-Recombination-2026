@@ -1,7 +1,7 @@
 # ============================================================
 # Recombination Frequency Calculation (Pooled & Total RF)
 # ============================================================
-
+setwd("~/GitHub/Hypoxia-Recombination-2026")
 library(dplyr)
 library(tidyr)
 
@@ -72,6 +72,12 @@ counts_long <- multi_locus_data %>%
   left_join(crossover_key, by = "class_num") %>%
   left_join(interval_membership, by = "class_num")
 
+# Define helper function for Kosambi Map Distance (returns cM)
+kosambi_cm <- function(r) {
+  # Safe handling: recombination frequency r must be strictly < 0.5
+  ifelse(r < 0.5, 25 * log((1 + 2 * r) / (1 - 2 * r)), NA)
+}
+
 # Per-vial Calculation
 recomb_by_interval_vial <- counts_long %>%
   group_by(ID) %>%
@@ -82,14 +88,24 @@ recomb_by_interval_vial <- counts_long %>%
     .groups = "drop"
   ) %>%
   mutate(
+    # Uncorrected Recombination Frequencies (RF)
     Total_RF   = total_recombinants / total_flies,
     RF_y_cv    = CO_I1 / total_flies,
     RF_cv_v    = CO_I2 / total_flies,
     RF_v_f     = CO_I3 / total_flies,
     RF_f_car   = CO_I4 / total_flies,
-    RF_car_yP  = CO_I5 / total_flies
+    RF_car_yP  = CO_I5 / total_flies,
+    
+    # Kosambi-Corrected Map Distances for individual intervals (in cM)
+    cM_y_cv    = kosambi_cm(RF_y_cv),
+    cM_cv_v    = kosambi_cm(RF_cv_v),
+    cM_v_f     = kosambi_cm(RF_v_f),
+    cM_f_car   = kosambi_cm(RF_f_car),
+    cM_car_yP  = kosambi_cm(RF_car_yP),
+    
+    # True Total Map Distance = Sum of individual Kosambi interval distances
+    cM_Total   = cM_y_cv + cM_cv_v + cM_v_f + cM_f_car + cM_car_yP
   )
-
 
 # ============================================================
 # 4. Final Output
