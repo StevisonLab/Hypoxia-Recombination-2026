@@ -1,0 +1,2 @@
+﻿KEGGID,Description,GeneRatio,BgRatio,pvalue,padj,geneID,geneName,keggID,Count
+dme03030,DNA replication,9/189,34/3204,0.000103437,0.010550581,FBgn0020633/FBgn0024332/FBgn0025815/FBgn0014861/FBgn0259676/FBgn0025832/FBgn0027559/FBgn0005655/FBgn0035644,Mcm7/Mcm3/Mcm6/Mcm2/DNApol-alpha60/Fen1/Pol32/PCNA/DNApol-epsilon58,dme:Dmel_CG4978/dme:Dmel_CG4206/dme:Dmel_CG4039/dme:Dmel_CG7538/dme:Dmel_CG5553/dme:Dmel_CG8648/dme:Dmel_CG3975/dme:Dmel_CG9193/dme:Dmel_CG10489,9
