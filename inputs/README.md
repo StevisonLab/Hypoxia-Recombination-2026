@@ -26,7 +26,7 @@ Raw data and analysis input files for the hypoxia experiment. Data-collector ini
 | `Control_Day2vsHypoxia_Day2_deg.csv` and the five other `*_Day2*`/`*_Day6*` files | The same, for each sampling day. |
 | `*.up_GOenrich_significant.csv`, `*.down_GOenrich_significant.csv`, `*.all_KEGGenrich_significant.csv` | Significant GO and KEGG terms (clusterProfiler, BH-adjusted *P* < 0.05), days pooled. |
 | `GO-day2,6/`, `KEGG-day2,6/` | Significant GO and KEGG terms for each sampling day. |
-| `novomagic_KeyGeneID_20260424_121126043_get_annot.txt` | Novomagic gene-subset export (24 April 2026): per-sample FPKM and DESeq2 results for 71 selected genes. Unmodified download (tab-separated). Used for Figure S6 and Table S9. |
+| `novomagic_KeyGeneID_20260424_121126043_get_annot.txt` | Novomagic gene-subset export (24 April 2026): per-sample FPKM and DESeq2 results for 71 selected genes. Unmodified download (tab-separated). Used for Figure S6. Its gene list includes 26 of the 27 Table S9 genes (all except *Tribbles*), and its DESeq2 values for those genes match the genome-wide `*_deg.csv` files exactly; Table S9 itself is built from the `*_deg.csv` files. |
 
 ## Analysis input files
 

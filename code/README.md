@@ -54,7 +54,7 @@ Differential expression (DESeq2) and GO/KEGG enrichment (clusterProfiler) were p
 | `FigureS3_volcano_upset.R` | Figure S3: per-day volcano plots (a–f) and per-day UpSet plot (g). |
 | `DEG_Volcano_perday_Analysis.R`, `DEG_DayUpset_Analysis.R` | Earlier per-day volcano and UpSet plots, superseded by `FigureS3_volcano_upset.R`. |
 | `figure_S6_HIF_genes.R` | Figure S6: FPKM of the core HIF pathway genes (Novomagic export), annotated with the genome-wide DESeq2 results. |
-| `table_S9_hypoxia_genes.R` | Table S9: DESeq2 results for known hypoxia-responsive genes, pooled and by day, plus mean FPKM across all 24 samples. |
+| `table_S9_hypoxia_genes.R` | Table S9: DESeq2 results for known hypoxia-responsive genes and for the homologous recombination genes discussed in the text, pooled and by day, plus mean FPKM across all 24 samples. |
 
 ## R packages
 

@@ -1,7 +1,8 @@
 setwd("~/GitHub/Hypoxia-Recombination-2026/")
 
 # ============================================================
-# Table S9: expression of known hypoxia-responsive genes
+# Table S9: expression of known hypoxia-responsive genes, plus the
+# homologous recombination genes discussed in the text
 #
 # All statistics are taken from the genome-wide DESeq2 results
 # (Novogene; Benjamini-Hochberg adjusted P) in inputs/*_deg.csv.
@@ -39,6 +40,13 @@ Stress and autophagy|Hsp70Aa|FBgn0013275|Up|Azad et al. 2009
 Stress and autophagy|Hsp70Ab|FBgn0013276|Up|Azad et al. 2009
 Stress and autophagy|Hsp23|FBgn0001224|Up|Azad et al. 2009
 Stress and autophagy|Atg8a|FBgn0052672|Up|Valko et al. 2022
+Homologous recombination|Blm|FBgn0002906|Not hypoxia-related (discussed in text)|KEGG dme03440; Hatkevich et al. 2017
+Homologous recombination|rad50|FBgn0034728|Not hypoxia-related (discussed in text)|KEGG dme03440
+Homologous recombination|okra (Rad54)|FBgn0002989|Not hypoxia-related (discussed in text)|KEGG dme03440
+Homologous recombination|mus101|FBgn0002878|Not hypoxia-related (discussed in text)|KEGG dme03440
+Homologous recombination|mms4|FBgn0033549|Not hypoxia-related (discussed in text)|KEGG dme03440
+Homologous recombination|Pol32|FBgn0027559|Not hypoxia-related (discussed in text)|KEGG dme03440
+Homologous recombination|RpA-70|FBgn0010173|Not hypoxia-related (discussed in text)|KEGG dme03440
 ", sep = "|", strip.white = TRUE, check.names = FALSE, stringsAsFactors = FALSE)
 
 # Each DEG file reports log2FoldChange = log2(first/second treatment in the
