@@ -29,11 +29,17 @@ label_and_tag <- function(df, comparison, direction) {
   return(df)
 }
 
-Hypoxia_vs_Control_up    <- label_and_tag(Hypoxia_vs_Control_up,    "Chamber 8% vs Control 21%",  "Up")
-Normoxia_vs_Control_up   <- label_and_tag(Normoxia_vs_Control_up,   "Chamber 21% vs Control 21%", "Up")
+Hypoxia_vs_Control_up    <- label_and_tag(Hypoxia_vs_Control_up,    "Chamber 8 kPa vs Control",  "Up")
+Normoxia_vs_Control_up   <- label_and_tag(Normoxia_vs_Control_up,   "Chamber 21 kPa vs Control", "Up")
 
-Hypoxia_vs_Control_down  <- label_and_tag(Hypoxia_vs_Control_down,  "Chamber 8% vs Control 21%",  "Down")
-Normoxia_vs_Control_down <- label_and_tag(Normoxia_vs_Control_down, "Chamber 21% vs Control 21%", "Down")
+Hypoxia_vs_Control_down  <- label_and_tag(Hypoxia_vs_Control_down,  "Chamber 8 kPa vs Control",  "Down")
+Normoxia_vs_Control_down <- label_and_tag(Normoxia_vs_Control_down, "Chamber 21 kPa vs Control", "Down")
+
+# Panel labels in the PO2 notation used in Figures 1-3 and S3 (no "approx.")
+strip_labels <- c(
+  "Chamber 21 kPa vs Control" = 'Chamber~italic(P)[O[2]]~"21 kPa vs. Control"',
+  "Chamber 8 kPa vs Control"  = 'Chamber~italic(P)[O[2]]~"8 kPa vs. Control"'
+)
 
 # ============================================================================
 # PART 3: COMBINE AND FILTER (padj < 0.05)
@@ -70,9 +76,8 @@ prepare_dotplot_data <- function(df) {
         Description
       ),
       Comparison = factor(Comparison, levels = c(
-        "Chamber 21% vs Control 21%",
-        "Chamber 21% vs Chamber 8%",
-        "Chamber 8% vs Control 21%"
+        "Chamber 21 kPa vs Control",
+        "Chamber 8 kPa vs Control"
       ))
     )
 }
@@ -118,7 +123,8 @@ make_dotplot <- function(df, direction, dot_color, title_label) {
   ) +
     geom_point(alpha = 1) +    # NO transparency
     
-    facet_wrap(~Comparison, ncol = 3) +
+    facet_wrap(~Comparison, ncol = 3,
+               labeller = as_labeller(strip_labels, label_parsed)) +
     
     # Color gradient for significance
     scale_color_gradientn(
@@ -127,7 +133,7 @@ make_dotplot <- function(df, direction, dot_color, title_label) {
       } else {
         c("#BDD7E7", "#2171B5", "#08306B")   # light blue → deep blue
       },
-      name = "-log10(padj)"
+      name = expression(-log[10]~"adjusted"~italic(P))
     ) +
     
     scale_size_continuous(
@@ -142,7 +148,7 @@ make_dotplot <- function(df, direction, dot_color, title_label) {
     
     labs(
       title = title_label,
-      y     = "GO Pathway"
+      y     = "GO term"
     ) +
     
     theme_minimal(base_size = 20) +        # increased base font size
@@ -173,7 +179,7 @@ up_result <- make_dotplot(
   df          = up_data,
   direction   = "Up",
   dot_color   = "red",
-  title_label = "GO Pathway Enrichment — Up-Regulated Genes"
+  title_label = "GO term enrichment, up-regulated genes"
 )
 
 ggsave(
@@ -193,7 +199,7 @@ down_result <- make_dotplot(
   df          = down_data,
   direction   = "Down",
   dot_color   = "blue",
-  title_label = "GO Pathway Enrichment — Down-Regulated Genes"
+  title_label = "GO term enrichment, down-regulated genes"
 )
 
 ggsave(
