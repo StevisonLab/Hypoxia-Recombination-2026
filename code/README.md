@@ -11,7 +11,7 @@ R scripts for the hypoxia experiment. Unless noted, scripts set the working dire
 | Figure 2b (KEGG) | `KEGG_Analysis.R` | `dotplot_COMBINED_KEGG_allcomparisons.png` |
 | Figure 2 volcano panels | `DEG_Volcano_Analysis.R` | `volcano_*_padj.png` |
 | Figure 3; Tables 2–4; Tables S3–S7 | `9_hypoxia_figure_3_script.R` (after script 2) | `figure_three_*` tables |
-| Figure S2 | `standard_curve_script.R` | `figure_S2_standard_curves.pdf/.png` |
+| Figure S2 (a, standard curves; b, viability vs. egg density) | `standard_curve_script.R` (after script 9) | `figure_S2_standard_curves.pdf/.png` |
 | Figure S3 | `FigureS3_volcano_upset.R` | `figure_S3_volcano_upset.pdf/.png` |
 | Figures S4, S5 | `Go_Analysis.R` | `dotplot_UP_regulated_GO.png`, `dotplot_DOWN_regulated_GO.png` |
 | Figure S6 | `figure_S6_HIF_genes.R` | `figure_S6_HIF_genes.pdf/.png` |
