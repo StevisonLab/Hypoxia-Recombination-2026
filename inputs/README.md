@@ -30,13 +30,12 @@ Raw data and analysis input files for the hypoxia experiment. Data-collector ini
 
 ## Analysis input files
 
-These files were assembled outside the scripts from earlier outputs. They are being replaced by files written in code, starting with the per-vial recombination estimates.
+These files were assembled outside the scripts from earlier outputs. The per-vial recombination estimates are now written in code (`code/8c_hypoxia_build_anova_inputs.R`).
 
 | File | Used by |
 |---|---|
-| `21_output_for_anova.csv`, `21_output_for_anova_single_interval.csv` | Per-vial counting-model estimates for the map-length and interval analyses (script 9). |
+| `21_output_for_anova.csv`, `21_output_for_anova_single_interval.csv` | Per-vial counting-model estimates for the map-length, interval and interference analyses (script 9), built by `code/8c_hypoxia_build_anova_inputs.R`. Interval parameters run from the far end of the map: x1 *car–y+*, x2 *f–car*, x3 *v–f*, x4 *cv–v*, x5 *y–cv*. |
 | `full_dataset.csv` | Treatment-pooled phenotypic class counts (scripts 8 and `full_dataset_analysis.R`). |
 | `14_multi_locus_pooled_by_cross_dataset.csv`, `15_multi_locus_pooled_by_brood_dataset.csv` | Cross- and brood-pooled class counts (script 8). |
 | `pooled_by_cross_anova_input.csv` | Cross-pooled map-length estimates (script 8). |
-| `interference_anova_inputs.csv` | Inputs for the crossover interference analysis. |
 | `coincidence by genetic length formula.xlsx` | Coefficient of coincidence calculations. |

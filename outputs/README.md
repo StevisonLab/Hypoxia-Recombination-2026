@@ -28,7 +28,7 @@ Tables S3–S6 are the within-design rows of the `*_contrasts_table.csv` files. 
 | `table_S9_hypoxia_genes.csv` | Table S9 |
 | `common_140 genes.csv`, `common_genes_8pct_vs_21pct_vs_ctrl.csv` | Genes shared between comparisons (from `DEG_Analysis.R`) |
 
-> **Status (October 2026):** the map-length and interval results (`figure_three_c_*`) are being regenerated from re-fitted per-vial estimates; see `code/README.md`.
+> The map-length, interval and interference results (`figure_three_c_*`) use the re-fitted per-vial estimates and Type III tests.
 
 ## Intermediate datasets (script 2)
 
@@ -45,7 +45,7 @@ Tables S3–S6 are the within-design rows of the `*_contrasts_table.csv` files. 
 
 | File(s) | Contents |
 |---|---|
-| `21_1_through_171_…`, `21_172_through_200_…`, `21_201_247_multi_locus_individual_vials_H3_mle_output.csv` | Per-vial H3 fits, run in three batches (being regenerated) |
+| `21_per_vial_H3_mle_output.csv` | Per-vial H3 fits for all 247 vials, keyed by vial ID |
 | `21_multi_locus_individual_vials_H3_mle_output.csv`, `full_dataset_output.csv` | Treatment-pooled H3 fits |
 | `22_multi_locus_cross_pooled_H3_mle_output.csv`, `23_multi_locus_brood_pooled_H3_mle_output.csv` | Cross- and brood-pooled H3 fits |
 | `table_S1_marker_free_viability_regression.csv`, `table_S10_`–`table_S12_*_anova.csv` | Viability regression and pooled-data ANOVAs (file numbering predates the current supplement; not reported in the paper) |
@@ -53,5 +53,5 @@ Tables S3–S6 are the within-design rows of the `*_contrasts_table.csv` files. 
 ## Other files
 
 - `figure_two_*`: outputs of the earlier Figure 3 script (`9_hypoxia_tables_and_figures_script.R`).
-- `interference_anova.csv`, `coefficient_of_conincidence_dataset.csv`: crossover interference and coefficient of coincidence results.
+- `coefficient_of_conincidence_dataset.csv`: coefficient of coincidence results.
 - `*.xlsx`: spreadsheet working files (post hoc tests, survival ANOVA, full-dataset exploration, coefficient of coincidence, combined per-vial fits).
