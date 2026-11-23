@@ -1,0 +1,99 @@
+"Comparison","Day","Direction","KEGG_ID","Pathway","Genes","GeneRatio","padj"
+"21 kPa vs Control","Day 2","Higher","dme04512","ECM-receptor interaction",8,"8/299",7.08e-05
+"21 kPa vs Control","Day 2","Higher","dme02010","ABC transporters",13,"13/299",0.00101
+"21 kPa vs Control","Day 2","Higher","dme00670","One carbon pool by folate",9,"9/299",0.00884
+"21 kPa vs Control","Day 2","Higher","dme03008","Ribosome biogenesis in eukaryotes",16,"16/299",0.00921
+"21 kPa vs Control","Day 2","Lower","dme03010","Ribosome",51,"51/322",6.07e-17
+"21 kPa vs Control","Day 2","Lower","dme00190","Oxidative phosphorylation",37,"37/322",1.89e-08
+"21 kPa vs Control","Day 2","Lower","dme03050","Proteasome",18,"18/322",1.21e-06
+"21 kPa vs Control","Day 2","Lower","dme03040","Spliceosome",25,"25/322",0.00486
+"8 kPa vs 21 kPa","Day 2","Higher","dme03082","ATP-dependent chromatin remodeling",33,"33/436",2.35e-10
+"8 kPa vs 21 kPa","Day 2","Higher","dme03030","DNA replication",22,"22/436",2.35e-10
+"8 kPa vs 21 kPa","Day 2","Higher","dme03430","Mismatch repair",13,"13/436",1.63e-06
+"8 kPa vs 21 kPa","Day 2","Higher","dme03420","Nucleotide excision repair",20,"20/436",2.65e-05
+"8 kPa vs 21 kPa","Day 2","Higher","dme03440","Homologous recombination",12,"12/436",0.000335
+"8 kPa vs 21 kPa","Day 2","Higher","dme03040","Spliceosome",33,"33/436",0.000335
+"8 kPa vs 21 kPa","Day 2","Higher","dme03022","Basal transcription factors",15,"15/436",0.0015
+"8 kPa vs 21 kPa","Day 2","Higher","dme04120","Ubiquitin mediated proteolysis",25,"25/436",0.00365
+"8 kPa vs 21 kPa","Day 2","Higher","dme03460","Fanconi anemia pathway",11,"11/436",0.00426
+"8 kPa vs 21 kPa","Day 2","Higher","dme04620","Toll-like receptor signaling pathway",13,"13/436",0.00633
+"8 kPa vs 21 kPa","Day 2","Higher","dme03410","Base excision repair",11,"11/436",0.00998
+"8 kPa vs 21 kPa","Day 2","Higher","dme04068","FoxO signaling pathway",17,"17/436",0.0105
+"8 kPa vs 21 kPa","Day 2","Higher","dme04310","Wnt signaling pathway",22,"22/436",0.0105
+"8 kPa vs 21 kPa","Day 2","Higher","dme03013","Nucleocytoplasmic transport",21,"21/436",0.0411
+"8 kPa vs 21 kPa","Day 2","Lower","dme01200","Carbon metabolism",49,"49/523",5.37e-12
+"8 kPa vs 21 kPa","Day 2","Lower","dme01210","2-Oxocarboxylic acid metabolism",23,"23/523",1.48e-10
+"8 kPa vs 21 kPa","Day 2","Lower","dme00020","Citrate cycle (TCA cycle)",23,"23/523",7.3e-10
+"8 kPa vs 21 kPa","Day 2","Lower","dme04820","Cytoskeleton in muscle cells",29,"29/523",1.34e-09
+"8 kPa vs 21 kPa","Day 2","Lower","dme00670","One carbon pool by folate",18,"18/523",1.52e-08
+"8 kPa vs 21 kPa","Day 2","Lower","dme04512","ECM-receptor interaction",11,"11/523",3.33e-08
+"8 kPa vs 21 kPa","Day 2","Lower","dme01230","Biosynthesis of amino acids",29,"29/523",1.77e-07
+"8 kPa vs 21 kPa","Day 2","Lower","dme00260","Glycine, serine and threonine metabolism",16,"16/523",1.19e-06
+"8 kPa vs 21 kPa","Day 2","Lower","dme00630","Glyoxylate and dicarboxylate metabolism",16,"16/523",9.77e-06
+"8 kPa vs 21 kPa","Day 2","Lower","dme00785","Lipoic acid metabolism",11,"11/523",9.66e-05
+"8 kPa vs 21 kPa","Day 2","Lower","dme00270","Cysteine and methionine metabolism",17,"17/523",0.000116
+"8 kPa vs 21 kPa","Day 2","Lower","dme00010","Glycolysis / Gluconeogenesis",20,"20/523",0.000185
+"8 kPa vs 21 kPa","Day 2","Lower","dme00250","Alanine, aspartate and glutamate metabolism",15,"15/523",0.000364
+"8 kPa vs 21 kPa","Day 2","Lower","dme04142","Lysosome",35,"35/523",0.00047
+"8 kPa vs 21 kPa","Day 2","Lower","dme00030","Pentose phosphate pathway",11,"11/523",0.000548
+"8 kPa vs 21 kPa","Day 2","Lower","dme02010","ABC transporters",16,"16/523",0.00082
+"8 kPa vs 21 kPa","Day 2","Lower","dme04981","Folate transport and metabolism",11,"11/523",0.000869
+"8 kPa vs 21 kPa","Day 2","Lower","dme00640","Propanoate metabolism",13,"13/523",0.000977
+"8 kPa vs 21 kPa","Day 2","Lower","dme00220","Arginine biosynthesis",10,"10/523",0.00152
+"8 kPa vs 21 kPa","Day 2","Lower","dme00280","Valine, leucine and isoleucine degradation",14,"14/523",0.0016
+"8 kPa vs 21 kPa","Day 2","Lower","dme00620","Pyruvate metabolism",16,"16/523",0.0018
+"8 kPa vs 21 kPa","Day 2","Lower","dme00380","Tryptophan metabolism",10,"10/523",0.00367
+"8 kPa vs 21 kPa","Day 2","Lower","dme01212","Fatty acid metabolism",17,"17/523",0.0088
+"8 kPa vs 21 kPa","Day 2","Lower","dme00310","Lysine degradation",13,"13/523",0.00968
+"8 kPa vs 21 kPa","Day 2","Lower","dme04145","Phagosome",21,"21/523",0.0133
+"8 kPa vs 21 kPa","Day 2","Lower","dme00230","Purine metabolism",24,"24/523",0.0133
+"8 kPa vs 21 kPa","Day 2","Lower","dme00410","beta-Alanine metabolism",10,"10/523",0.021
+"8 kPa vs 21 kPa","Day 2","Lower","dme00040","Pentose and glucuronate interconversions",15,"15/523",0.0325
+"8 kPa vs 21 kPa","Day 2","Lower","dme00511","Other glycan degradation",8,"8/523",0.0353
+"8 kPa vs 21 kPa","Day 2","Lower","dme00061","Fatty acid biosynthesis",6,"6/523",0.0402
+"8 kPa vs 21 kPa","Day 2","Lower","dme01240","Biosynthesis of cofactors",33,"33/523",0.0411
+"8 kPa vs Control","Day 2","Higher","dme03030","DNA replication",21,"21/197",4.03e-16
+"8 kPa vs Control","Day 2","Higher","dme03410","Base excision repair",11,"11/197",2.57e-05
+"8 kPa vs Control","Day 2","Higher","dme03420","Nucleotide excision repair",13,"13/197",6.45e-05
+"8 kPa vs Control","Day 2","Higher","dme03440","Homologous recombination",9,"9/197",0.000111
+"8 kPa vs Control","Day 2","Higher","dme03430","Mismatch repair",8,"8/197",0.000111
+"8 kPa vs Control","Day 2","Higher","dme03082","ATP-dependent chromatin remodeling",14,"14/197",0.000644
+"8 kPa vs Control","Day 2","Higher","dme03460","Fanconi anemia pathway",8,"8/197",0.00153
+"8 kPa vs Control","Day 2","Higher","dme03013","Nucleocytoplasmic transport",14,"14/197",0.00801
+"8 kPa vs Control","Day 2","Higher","dme03083","Polycomb repressive complex",9,"9/197",0.00938
+"8 kPa vs Control","Day 2","Higher","dme04350","TGF-beta signaling pathway",9,"9/197",0.01
+"8 kPa vs Control","Day 2","Lower","dme03010","Ribosome",61,"61/301",1.09e-27
+"8 kPa vs Control","Day 2","Lower","dme00190","Oxidative phosphorylation",49,"49/301",1.3e-18
+"8 kPa vs Control","Day 2","Lower","dme00020","Citrate cycle (TCA cycle)",11,"11/301",0.00401
+"8 kPa vs Control","Day 2","Lower","dme00620","Pyruvate metabolism",12,"12/301",0.00601
+"8 kPa vs Control","Day 2","Lower","dme01210","2-Oxocarboxylic acid metabolism",10,"10/301",0.00673
+"8 kPa vs Control","Day 2","Lower","dme00010","Glycolysis / Gluconeogenesis",12,"12/301",0.0236
+"21 kPa vs Control","Day 6","Higher","dme03030","DNA replication",20,"20/149",4.66e-17
+"21 kPa vs Control","Day 6","Higher","dme03430","Mismatch repair",6,"6/149",0.00719
+"21 kPa vs Control","Day 6","Higher","dme03410","Base excision repair",7,"7/149",0.0108
+"21 kPa vs Control","Day 6","Higher","dme03420","Nucleotide excision repair",8,"8/149",0.0335
+"21 kPa vs Control","Day 6","Lower","dme03010","Ribosome",67,"67/256",1.05e-38
+"21 kPa vs Control","Day 6","Lower","dme04140","Autophagy - animal",20,"20/256",0.0206
+"8 kPa vs 21 kPa","Day 6","Higher","dme03030","DNA replication",9,"9/189",0.0106
+"8 kPa vs 21 kPa","Day 6","Lower","dme03010","Ribosome",68,"68/237",1.98e-42
+"8 kPa vs 21 kPa","Day 6","Lower","dme00190","Oxidative phosphorylation",40,"40/237",1.92e-15
+"8 kPa vs Control","Day 6","Higher","dme03030","DNA replication",28,"28/431",1.16e-17
+"8 kPa vs Control","Day 6","Higher","dme03410","Base excision repair",18,"18/431",1.16e-07
+"8 kPa vs Control","Day 6","Higher","dme03430","Mismatch repair",14,"14/431",1.16e-07
+"8 kPa vs Control","Day 6","Higher","dme03420","Nucleotide excision repair",21,"21/431",5.7e-06
+"8 kPa vs Control","Day 6","Higher","dme03440","Homologous recombination",12,"12/431",0.000392
+"8 kPa vs Control","Day 6","Higher","dme03460","Fanconi anemia pathway",12,"12/431",0.00143
+"8 kPa vs Control","Day 6","Higher","dme03083","Polycomb repressive complex",15,"15/431",0.0058
+"8 kPa vs Control","Day 6","Higher","dme03082","ATP-dependent chromatin remodeling",20,"20/431",0.00661
+"8 kPa vs Control","Day 6","Higher","dme03013","Nucleocytoplasmic transport",23,"23/431",0.0136
+"8 kPa vs Control","Day 6","Lower","dme03010","Ribosome",89,"89/484",1.02e-41
+"8 kPa vs Control","Day 6","Lower","dme00190","Oxidative phosphorylation",52,"52/484",7.64e-12
+"8 kPa vs Control","Day 6","Lower","dme00260","Glycine, serine and threonine metabolism",11,"11/484",0.0286
+"21 kPa vs Control","Pooled","All DEGs","dme03010","Ribosome",65,"65/462",6.81e-20
+"21 kPa vs Control","Pooled","All DEGs","dme00190","Oxidative phosphorylation",44,"44/462",1.13e-07
+"8 kPa vs Control","Pooled","All DEGs","dme03010","Ribosome",97,"97/935",1.69e-24
+"8 kPa vs Control","Pooled","All DEGs","dme03030","DNA replication",30,"30/935",2.44e-11
+"8 kPa vs Control","Pooled","All DEGs","dme00190","Oxidative phosphorylation",69,"69/935",9.59e-09
+"8 kPa vs Control","Pooled","All DEGs","dme03430","Mismatch repair",16,"16/935",2.02e-05
+"8 kPa vs Control","Pooled","All DEGs","dme03440","Homologous recombination",16,"16/935",0.00267
+"8 kPa vs Control","Pooled","All DEGs","dme03410","Base excision repair",18,"18/935",0.00596

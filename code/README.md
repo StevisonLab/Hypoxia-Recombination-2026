@@ -17,6 +17,7 @@ R scripts for the hypoxia experiment. Unless noted, scripts set the working dire
 | Figure S6 | `figure_S6_HIF_genes.R` | `figure_S6_HIF_genes.pdf/.png` |
 | Table S8 | `DEG_Analysis.R`, `DEG_Daysummary_Analysis.R` | `summary_all_significant_DEGs_padj.csv`, `deg_up_down_day_summary.csv` |
 | Table S9 | `table_S9_hypoxia_genes.R` | `table_S9_hypoxia_genes.csv` |
+| Tables S10, S11 | `table_S10_S11_KEGG_by_day.R` | `table_S10_KEGG_by_day.csv`, `table_S11_pathway_fold_changes.csv` |
 
 Figure panels from several scripts (Figures 2 and 3) were assembled outside R.
 
@@ -57,6 +58,7 @@ Differential expression (DESeq2) and GO/KEGG enrichment (clusterProfiler) were p
 | `DEG_Volcano_perday_Analysis.R`, `DEG_DayUpset_Analysis.R` | Earlier per-day volcano and UpSet plots, superseded by `FigureS3_volcano_upset.R`. |
 | `figure_S6_HIF_genes.R` | Figure S6: FPKM of the core HIF pathway genes (Novomagic export), annotated with the genome-wide DESeq2 results. |
 | `table_S9_hypoxia_genes.R` | Table S9: DESeq2 results for known hypoxia-responsive genes and for the homologous recombination genes discussed in the text, pooled and by day, plus mean FPKM across all 24 samples. |
+| `table_S10_S11_KEGG_by_day.R` | Table S10: KEGG enrichment for every comparison, pooled and by day. Table S11: median log2 fold changes across all genes in the ribosome, oxidative phosphorylation, glycolysis and TCA cycle pathways (membership in `inputs/kegg_gene_sets.csv`). |
 
 ## R packages
 
