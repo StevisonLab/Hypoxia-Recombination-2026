@@ -617,10 +617,10 @@ for (g in 1:21) {
 }
 
 MLE_H3_looped_brood_outputs
-write.csv(MLE_H3_looped_brood_outputs,"../outputs/full_dataset_output.csv",row.names = TRUE)
+write.csv(MLE_H3_looped_brood_outputs,"../outputs/23_multi_locus_brood_pooled_H3_mle_output.csv",row.names = TRUE)
 
 # Perform ANOVA on brood pooled estimates fitting an intercept only model
 brood_pooled_anova_input <- as.data.frame(MLE_H3_looped_brood_outputs)
 brood_pooled_anova.lm <- lm(brood_pooled_anova_input$MLE_X_length ~ 1, data=brood_pooled_anova_input)
 brood_pooled_anova_anova.table <- anova(brood_pooled_anova.lm)
-write.csv(brood_pooled_anova_anova.table,"../Summaries and Outputs/table_S12_brood_pooled_anova.csv",row.names = TRUE)
+write.csv(brood_pooled_anova_anova.table,"../outputs/table_S12_brood_pooled_anova.csv",row.names = TRUE)

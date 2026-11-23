@@ -21,14 +21,16 @@ Results written by the scripts in `code/` (see `code/README.md` for which script
 |---|---|
 | `figure_three_a_fecundity_*` | Fecundity: Table 2, Figure 3a, Tables S3–S4 |
 | `figure_three_b_*_survival_*` | Egg-to-adult survival: Table 3, Figure 3b, Tables S5–S6 |
-
-Tables S3–S6 are the within-design rows of the `*_contrasts_table.csv` files. Experiment NRR_2 is the marker-free cross and NRR_1 the multiply-marked cross.
-| `figure_three_c_length_*`, `figure_three_c_x1`–`x5_*` | X-chromosome map length and the five intervals: Table 4, Figure 3c, Table S7 |
+| `full_dataset_output.csv` | X-chromosome map length and interference from the treatment-pooled fits: Table 1 |
+| `figure_three_c_length_*`, `figure_three_c_interference_*`, `figure_three_c_x1`–`x5_*` | Per-vial X-chromosome map length, crossover interference and the five intervals: Table 4, Table S7 |
+| `figure_three_c_boxplot.pdf/.png` | Figure 3c |
 | `summary_all_significant_DEGs_padj.csv`, `deg_up_down_day_summary.csv` | Table S8 (pooled and per-day DEG counts) |
 | `table_S9_hypoxia_genes.csv` | Table S9 |
+| `table_S10_KEGG_by_day.csv` | Table S10 |
+| `table_S11_pathway_fold_changes.csv` | Table S11 |
 | `common_140 genes.csv`, `common_genes_8pct_vs_21pct_vs_ctrl.csv` | Genes shared between comparisons (from `DEG_Analysis.R`) |
 
-> The map-length, interval and interference results (`figure_three_c_*`) use the re-fitted per-vial estimates and Type III tests.
+Tables S3–S6 are the within-design rows of the `*_contrasts_table.csv` files. Experiment NRR_2 is the marker-free cross and NRR_1 the multiply-marked cross. All ANOVAs use Type III sums of squares.
 
 ## Intermediate datasets (script 2)
 
@@ -41,17 +43,18 @@ Tables S3–S6 are the within-design rows of the `*_contrasts_table.csv` files. 
 | `14_`–`16_*` | Cross-, brood- and experiment-pooled class counts |
 | `14_recombination_frequency_per_vial.csv` | Observed recombination fractions (`Melika_RecombinationFrequency.R`) |
 
-## Counting-model fits (scripts 7 and 8)
+## Counting-model fits (scripts 7, 8, 8b and 8c)
 
 | File(s) | Contents |
 |---|---|
-| `21_per_vial_H3_mle_output.csv` | Per-vial H3 fits for all 247 vials, keyed by vial ID |
-| `21_multi_locus_individual_vials_H3_mle_output.csv`, `full_dataset_output.csv` | Treatment-pooled H3 fits |
+| `21_per_vial_H3_mle_output.csv` | Per-vial H3 fits for all 247 vials, keyed by vial ID (scripts 8b and 8c) |
+| `21_output_for_anova.csv`, `21_output_for_anova_single_interval.csv` | Copies of the script 9 input files in `inputs/` (per-vial fits with vial labels) |
+| `21_multi_locus_individual_vials_H3_mle_output.csv`, `full_dataset_output.csv` | Treatment-pooled H3 fits (script 8 and `full_dataset_analysis.R`) |
 | `22_multi_locus_cross_pooled_H3_mle_output.csv`, `23_multi_locus_brood_pooled_H3_mle_output.csv` | Cross- and brood-pooled H3 fits |
-| `table_S1_marker_free_viability_regression.csv`, `table_S10_`–`table_S12_*_anova.csv` | Viability regression and pooled-data ANOVAs (file numbering predates the current supplement; not reported in the paper) |
+| `table_S1_marker_free_viability_regression.csv`, `table_S10_vials_pooled_anova.csv`, `table_S11_cross_pooled_anova.csv`, `table_S12_brood_pooled_anova.csv` | Viability regression and pooled-data ANOVAs. Not reported in the paper; their numbering predates the current supplement and doesn't match Tables S1 or S10–S12. |
 
 ## Other files
 
 - `figure_two_*`: outputs of the earlier Figure 3 script (`9_hypoxia_tables_and_figures_script.R`).
 - `coefficient_of_conincidence_dataset.csv`: coefficient of coincidence results.
-- `*.xlsx`: spreadsheet working files (post hoc tests, survival ANOVA, full-dataset exploration, coefficient of coincidence, combined per-vial fits).
+- `*.xlsx`: spreadsheet working files (post hoc tests, survival ANOVA, full-dataset exploration, coefficient of coincidence). `file_21_combined.xlsx` holds the earlier per-vial fits, replaced by `21_per_vial_H3_mle_output.csv`.

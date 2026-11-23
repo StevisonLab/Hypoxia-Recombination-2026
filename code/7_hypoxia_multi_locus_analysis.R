@@ -116,7 +116,7 @@ for (v in 1:max_p_value) {
 # Print the sorted table for records, make sure to RENAME FILE
 MLE_H0_full<-as.data.frame(MLE_H0_full_outputs)
 df0 <- MLE_H0_full[order(MLE_H0_full$lnL),]
-write.csv(df0,"../Summaries and Outputs/17_multi_locus_full_experiment_H0_mle_output.csv",row.names = TRUE)
+write.csv(df0,"../outputs/17_multi_locus_full_experiment_H0_mle_output.csv",row.names = TRUE)
 
 
 # Begin algorithm for fitting CxCoM H1 to full experiment dataset
@@ -238,7 +238,7 @@ for (v in 1:max_p_value) {
 # Print the sorted table for records, make sure to RENAME FILE
 MLE_H1_full<-as.data.frame(MLE_H1_full_outputs)
 df1 <- MLE_H1_full[order(MLE_H1_full$lnL),]
-write.csv(df1,"../Summaries and Outputs/18_multi_locus_full_experiment_H1_mle_output.csv",row.names = TRUE)
+write.csv(df1,"../outputs/18_multi_locus_full_experiment_H1_mle_output.csv",row.names = TRUE)
 
 # Begin algorithm for fitting CxCoM H2 to full experiment dataset
 # Create matrix to store all optimized outputs of CxCoM.Likelihood.H2
@@ -369,7 +369,7 @@ for (v in 1:max_p_value) {
 # Print the sorted table for records, make sure to RENAME FILE
 MLE_H2_full<-as.data.frame(MLE_H2_full_outputs)
 df2 <- MLE_H2_full[order(MLE_H2_full$lnL),]
-write.csv(df2,"../Summaries and Outputs/19_multi_locus_full_experiment_H2_mle_output.csv",row.names = TRUE)
+write.csv(df2,"../outputs/19_multi_locus_full_experiment_H2_mle_output.csv",row.names = TRUE)
 
 # Begin algorithm for fitting CxCoM H3 to full experiment dataset
 # Create matrix to store all optimized outputs of CxCoM.Likelihood.H3

@@ -30,11 +30,11 @@ Raw data and analysis input files for the hypoxia experiment. Data-collector ini
 
 ## Analysis input files
 
-These files were assembled outside the scripts from earlier outputs. The per-vial recombination estimates are now written in code (`code/8c_hypoxia_build_anova_inputs.R`).
+The two `21_output_for_anova*` files are written by `code/8c_hypoxia_build_anova_inputs.R`. The others were assembled outside the scripts from earlier outputs.
 
 | File | Used by |
 |---|---|
-| `21_output_for_anova.csv`, `21_output_for_anova_single_interval.csv` | Per-vial counting-model estimates for the map-length, interval and interference analyses (script 9), built by `code/8c_hypoxia_build_anova_inputs.R`. Interval parameters run from the far end of the map: x1 *car–y+*, x2 *f–car*, x3 *v–f*, x4 *cv–v*, x5 *y–cv*. |
+| `21_output_for_anova.csv`, `21_output_for_anova_single_interval.csv` | Per-vial counting-model estimates (247 vials) for the map-length, interval and interference analyses in script 9. Script 8c reads the vial labels (experiment, cross, brood, treatment, data collector) from `21_output_for_anova.csv` and rewrites both files with the fits matched by vial ID. `MLE_X_length` is total map length (cM), `MLE_p` is the interference parameter, and `MLE_x1`–`MLE_x5` are interval lengths, running from the far end of the map: x1 *car–y+*, x2 *f–car*, x3 *v–f*, x4 *cv–v*, x5 *y–cv*. |
 | `full_dataset.csv` | Treatment-pooled phenotypic class counts (scripts 8 and `full_dataset_analysis.R`). |
 | `14_multi_locus_pooled_by_cross_dataset.csv`, `15_multi_locus_pooled_by_brood_dataset.csv` | Cross- and brood-pooled class counts (script 8). |
 | `pooled_by_cross_anova_input.csv` | Cross-pooled map-length estimates (script 8). |
